@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	<contextName>logback-4001</contextName>
+	<jmxConfigurator />
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d %p [%c] - &lt;%m&gt;%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/service.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+			<maxHistory>7</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d %c - &lt;%m&gt;%n</pattern>
+		</encoder>
+	</appender>
+	<!-- <logger name="java.sql.Connection" level="debug" /> -->
+	<!-- <logger name="java.sql.Statement" level="debug" /> -->
+	<!-- <logger name="java.sql.PreparedStatement" level="debug" /> -->
+	<!-- <logger name="java.sql.ResultSet" level="debug" /> -->
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</configuration>
