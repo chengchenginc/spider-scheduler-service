@@ -1,6 +1,6 @@
 # spider-scheduler-service #
 ## 说明 ##
-基于webmagic-core简单封住，基于quartz持久化存储，采用dubbox提供rest服务的，定时计划任务
+基于webmagic-core爬取数据，基于quartz持久化存储，采用dubbox提供rest服务的，定时计划任务
 TODO：数据存储（ES或mysqk），数据导入
 
 
