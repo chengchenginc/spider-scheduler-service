@@ -4,19 +4,24 @@
 (function(win,$){
 	var jobManager = {};
 
+  jobManager.host = "http://localhost:8888/services/job"
+
 	jobManager.list = function(state,callback){
 		var url = "/list";
+    var data = {};
 		if("undefined"!=typeof(state) && state!=null){
-			url +="?state="+state;
+			data.state = state;
 		}
-		api.get(api.host+"/list",callback);
+		api.get(jobManager.host+"/list",data,callback);
 	};
 
 	jobManager.delJob = function(name,group,callback){
+      api.get(jobManager.host+"/delete",{name:name,group:group},callback);
 	};
 
 
 	jobManager.triggerJob = function(name,group,callback){
+      api.get(jobManager.host+"/trigger",{name:name,group:group},callback);
 	};
 
 
@@ -25,59 +30,20 @@
 
 
 	jobManager.modifyJobTrigger = function(name,group,cron,callback){
+      api.post(jobManager.host+"/modify",{name:name,group:group,cron:encodeURIComponent(cron)},callback);
 	};
 
 
 	jobManager.stopJob = function(name,group,callback){
-	};
-
-    
-	var api = {};
-	api.host = "http://localhost:8888/services/job";
-
-
-	api.request = function (url, callback, context) {
-		jQuery.ajax(url,{
-			data:context.body,
-			dataType:"JSON",
-			method:context.method,
-			success:function(reponse){
-				callback(reponse);
-			}
-		});
+     api.get(jobManager.host+"/stop",{name:name,group:group},callback);
 	};
 
 
-	api.get=function(url,callback){
-		var context = {
-			method: 'GET',
-			body:{}
-		};
-		api.request(url,callback,context);
+  jobManager.restartJob = function(name,group,callback){
+     api.get(jobManager.host+"/restart",{name:name,group:group},callback);
 	};
 
-	api.post=function(url,data,callback){
-		var context = {
-			method: 'POST',
-			body: JSON.stringify(data)
-		};
-		api.request(url,callback,context);
-	};
 
-	function checkStatus(response) {
-	  if (response.status >= 200 && response.status < 300) {
-		return response;
-	  } else {
-		var error = new Error(response.statusText)
-		error.response = response;
-		throw error;
-	  }
-	}
+	win.jobManager = jobManager;
 
-	function parseJSON(response) {
-	  return response.text();
-	}
-
-
-	window.jobManager = jobManager;
 })(window,jQuery);

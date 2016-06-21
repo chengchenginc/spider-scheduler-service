@@ -28,6 +28,8 @@ $(function() {
                 field: "description",
                 title: "描述"
             }],
+            checkboxHeader: false,
+            singleSelect: true,
             pagination: true, //是否显示分页（*）
             sidePagination: "client",
             sortable: false, //是否启用排序
@@ -45,17 +47,84 @@ $(function() {
 
 
         $(".editable").editable().on("save",function(e, params){
+            $row = $(this).parent();
+            var name = $row.find("td:eq(1)").text();
+            var group = $row.find("td:eq(2)").text();
+            var cron = params.submitValue;
+            jobManager.modifyJobTrigger(name,group,cron,function(){
+
+            });
             return false;
         });
         var queryParams = function(params) {
             var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
                 limit: params.limit, //页面大小
-                offset: params.offset, //页码
-                departmentname: $("#txt_search_departmentname").val(),
-                statu: $("#txt_search_statu").val()
+                offset: params.offset //页码
             };
             return temp;
         };
-
     });
+
+    //弹出层
+    $(".btn-fancybox").fancybox({
+          afterClose:function(){
+              var $form =  $("form[name='form_scheduler']");
+              $form[0].reset();
+          }
+    });
+
+    //新增解析属性
+    $(document).on("click",".btn-add-attribute",function(){
+      var $this = $(this);
+      var $table = $this.next();
+      var template = $("#attribute-row-template").html();
+      $(template).insertAfter($table.find("tr:last"));
+    });
+
+
+    //删除解析属性
+    $(document).on("click",".btn-remove-attribute",function(){
+      var $this = $(this);
+      var $tr = $this.parent().parent();
+      $tr.remove();
+    });
+
+
+    $("#btn_stop").click(function(){
+        var rows = $('#scheduler_list_table').bootstrapTable("getSelections");
+        if(rows.length>0){
+           var row = rows[0];
+           jobManager.stopJob(row.name,row.group,function(){
+
+           });
+        }
+    });
+
+    $("#btn_run_once").click(function(){
+        var rows = $('#scheduler_list_table').bootstrapTable("getSelections");
+        if(rows.length>0){
+           var row = rows[0];
+           jobManager.triggerJob(row.name,row.group);
+        }
+    });
+
+    $("#btn_delete").click(function(){
+        var rows = $('#scheduler_list_table').bootstrapTable("getSelections");
+        if(rows.length>0){
+           var row = rows[0];
+           jobManager.delJob(row.name,row.group);
+        }
+    });
+
+
+    $("#btn_restart").click(function(){
+        var rows = $('#scheduler_list_table').bootstrapTable("getSelections");
+        if(rows.length>0){
+           var row = rows[0];
+           jobManager.restartJob(row.name,row.group);
+        }
+    });
+
+
+
 });

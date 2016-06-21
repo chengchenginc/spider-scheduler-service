@@ -3,6 +3,7 @@ package com.nearco.cc.rest;
 import java.util.List;
 import java.util.Map;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -35,12 +36,16 @@ public interface JobService {
 	public Map<?, ?> stopJob(@QueryParam("name") String name, @QueryParam("group") String group);
 
 	@Path("modify")
-	@GET
-	public Map<?, ?> modifyTrigger(@QueryParam("name") String name, @QueryParam("group") String group,
-			@QueryParam("cron") String cron);
+	@POST
+	public Map<?, ?> modifyTrigger(@FormParam("name") String name, @FormParam("group") String group,
+			@FormParam("cron") String cron);
 
 	@Path("list")
 	@GET
 	public List<ScheduleJob> listAll(@QueryParam("state") String state);
+	
+	@Path("restart")
+	@GET
+	public Map<?, ?> restartJob(@QueryParam("name") String name, @QueryParam("group") String group);
 
 }

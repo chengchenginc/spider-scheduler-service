@@ -1,10 +1,13 @@
 package com.nearco.cc.rest.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.quartz.CronExpression;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
@@ -50,8 +53,17 @@ public class JobServiceImpl extends APIService implements JobService {
 
 	@Override
 	public Map<?, ?> modifyTrigger(String name, String group, String cron) {
-		jobService.modifyTrigger(name, group, cron);
-		return success(null, "ok");
+		try {
+			cron = URLDecoder.decode(cron,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		if(CronExpression.isValidExpression(cron)){
+			jobService.modifyTrigger(name, group, cron);
+			return success(null, "ok");
+		}else{
+			return error("表达式不正确");
+		}
 	}
 
 	@Override
@@ -60,6 +72,12 @@ public class JobServiceImpl extends APIService implements JobService {
 			return jobService.getAllRuningScheduleJob();
 		}
 		return jobService.getAllScheduleJob();
+	}
+
+	@Override
+	public Map<?, ?> restartJob(String name, String group) {
+		jobService.restartJob(name, group);
+		return success(null, "ok");
 	}
 
 }

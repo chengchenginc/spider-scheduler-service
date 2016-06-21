@@ -21,12 +21,21 @@ public class SimpleSpiderTask implements Job {
 		 ScheduleJob scheduleJob = (ScheduleJob)context.getMergedJobDataMap().get("scheduleJob");
 		 SimplePageProcessor pageProcessor = (SimplePageProcessor)context.getMergedJobDataMap().get("pageProcessor");
 		 SimplePage simplePage = (SimplePage)context.getMergedJobDataMap().get("simplePage");
-		 
 		 if(pageProcessor!=null && simplePage!=null){
 			 
 		 }
 		 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");    
 		 System.out.println("任务名称 = [" + scheduleJob.getName() + "]"+ " 在 " + dateFormat.format(new Date())+" 时运行"); 
 	}
+	
+/*	//获取注册的任务bean
+	private void getBean(JobExecutionContext context){
+		
+	}
+	
+	//注册任务类bean
+	private void registerBeanDefinition(){
+		
+	}*/
 
 }
