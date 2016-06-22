@@ -59,6 +59,8 @@ public class ScheduleJobService{
 		CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(scheduleJob.getName(), scheduleJob.getGroup()).withSchedule(scheduleBuilder).build();
 		try {
 			scheduler.scheduleJob(jobDetail, trigger);
+			//默认停止状态
+			stopJob(scheduleJob.getName(), scheduleJob.getGroup());
 			log.info("定时任务添加成功");
 		} catch (SchedulerException e) {
 			e.printStackTrace();

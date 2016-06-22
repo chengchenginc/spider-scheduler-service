@@ -4,7 +4,7 @@
 (function(win,$){
 	var jobManager = {};
 
-  jobManager.host = "http://localhost:8888/services/job"
+  jobManager.host = "http://localhost:8888/services/job";
 
 	jobManager.list = function(state,callback){
 		var url = "/list";

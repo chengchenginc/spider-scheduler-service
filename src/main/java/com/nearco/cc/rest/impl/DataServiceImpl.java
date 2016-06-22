@@ -2,8 +2,7 @@ package com.nearco.cc.rest.impl;
 
 import java.util.Map;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nearco.cc.model.PagerModel;
@@ -15,7 +14,7 @@ import com.nearco.cc.search.service.SearchService;
 @Service
 public class DataServiceImpl extends APIService implements DataService {
 
-	@Resource
+	@Autowired
 	private SearchService searchServiceImpl;
 	
 	@Override
@@ -25,6 +24,7 @@ public class DataServiceImpl extends APIService implements DataService {
 
 	@Override
 	public Map<?, ?> delete(String name, String group) {
+		searchServiceImpl.clearData(name, group);
 		return success(null,"ok");
 	}
 

@@ -35,8 +35,11 @@
     <dubbo:protocol name="webservice" port="8892"/>
      -->
     <bean id="JobService" class="com.nearco.cc.rest.impl.JobServiceImpl" />
+    <bean id="DataService" class="com.nearco.cc.rest.impl.DataServiceImpl" />
     
     <dubbo:service interface="com.nearco.cc.rest.JobService" ref="JobService"  protocol="rest" validation="true"/>
+    <dubbo:service interface="com.nearco.cc.rest.DataService" ref="DataService"  protocol="rest" validation="true"/>
+    
 </beans>
 
 

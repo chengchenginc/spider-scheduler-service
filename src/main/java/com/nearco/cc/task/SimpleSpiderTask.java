@@ -7,8 +7,8 @@ import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-
 import com.nearco.cc.Constants;
+import com.nearco.cc.model.CrawlerType;
 import com.nearco.cc.model.ScheduleJob;
 import com.nearco.cc.model.SimplePage;
 import com.nearco.cc.pipline.ELKPipline;
@@ -27,8 +27,9 @@ public class SimpleSpiderTask implements Job {
 		 if(simplePage!=null){
 			 SimplePageProcessor pageProcessor = new SimplePageProcessor();
 			 pageProcessor.setSimplePage(simplePage);
+			 boolean flag = simplePage.getCrawlerType()==CrawlerType.list;
 			 Spider.create(pageProcessor).addUrl(simplePage.getStartUrl()).addPipeline(new ELKPipline()
-					 .setIndex(scheduleJob.getName()).setType(scheduleJob.getGroup())).thread(5).run();
+					 .setIndex(scheduleJob.getName()).setType(scheduleJob.getGroup()).setList(flag)).thread(5).run();
 		 }
 		 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");    
 		 System.out.println("任务名称 = [" + scheduleJob.getName() + "]"+ " 在 " + dateFormat.format(new Date())+" 时运行"); 

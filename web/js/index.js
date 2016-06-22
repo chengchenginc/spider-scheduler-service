@@ -27,6 +27,13 @@ $(function() {
             }, {
                 field: "description",
                 title: "描述"
+            },{
+                title: "操作",
+                formatter:function(value,row,index){
+                  var view = '<a href="showdata.html?name='+row.name+'&group='+row.group+'" target="_blank">查看数据</a>';
+                  var edit = '<a href="javascript:;" style="margin-left:30px;">编辑</a>';
+                  return view+edit;
+                }
             }],
             checkboxHeader: false,
             singleSelect: true,

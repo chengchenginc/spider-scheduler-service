@@ -10,6 +10,6 @@ public interface SearchService {
 	
 	public void clearData(String index,String type);
 	
-	public void bulkIndex(String index,String type,ResultItems resultItems);
+	public void bulkIndex(String index,String type,boolean isList,ResultItems resultItems);
 	
 }

@@ -16,7 +16,7 @@
         formdata.cron = $("#cronExpression").val();
         formdata.className = $("#className").val();
         formdata.crawlerType = $("#crawlerType").val();
-        formdata.ListNodeSelector = $("#ListNodeSelector").val();
+        formdata.listNodeSelector = $("#listNodeSelector").val();
         formdata.startUrl = $("#startUrl").val();
         if(formdata.crawlerType && formdata.crawlerType==2){
             //区域列表需要设置区域块样式
@@ -26,7 +26,6 @@
         }
         //字段解析设置
         var attributes = new Array();
-        console.log($(".row_attribute"));
         $(".row_attribute").each(function(){
             var attribute = {};
             var $row = $(this);

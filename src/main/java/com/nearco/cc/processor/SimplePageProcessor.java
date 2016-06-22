@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.nearco.cc.Constants;
 import com.nearco.cc.model.CrawlerType;
 import com.nearco.cc.model.SelectType;
 import com.nearco.cc.model.SimpleAttribute;
@@ -106,7 +107,7 @@ public class SimplePageProcessor implements PageProcessor {
 			}
 			list.add(items);
 		}
-		page.putField("items", list);
+		page.putField(Constants.SPIDER_LIST_MUTI_FIELD, list);
 	}
 
 	@Override
