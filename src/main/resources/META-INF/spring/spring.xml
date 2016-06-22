@@ -88,4 +88,11 @@
 		<property name="applicationContextSchedulerContextKey" value="applicationContextKey"/>    
     </bean>  
     
+    <bean class="com.nearco.cc.util.SpringContextUtil" lazy-init="false" /> 
+    
+    <bean class="com.nearco.cc.search.service.impl.SearchServiceImpl"  id="searchServiceImpl" >
+    	<property name="hosts" value="${elastic.hosts}"/>
+    	<property name="cluster" value="${elastic.cluster}"/>
+    </bean> 
+    
 </beans>

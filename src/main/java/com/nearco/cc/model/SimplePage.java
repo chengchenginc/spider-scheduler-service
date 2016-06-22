@@ -1,5 +1,6 @@
 package com.nearco.cc.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +10,9 @@ import com.alibaba.fastjson.JSON;
 
 import us.codecraft.webmagic.Site;
 
-public class SimplePage {
+public class SimplePage implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Site site;
 	// 浏览器设置
 	private String domain;

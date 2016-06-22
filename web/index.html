@@ -72,15 +72,16 @@
 <script src="components/fetch.js" ></script>
 <script src="components/template.js" ></script>
 <script src="components/api.js" ></script>
-<script src="components/jobmanager.js" ></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <!-- Latest compiled and minified Locales -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="js/jobmanager.js" ></script>
+<script src="js/scheduler.js"></script>
 <script src="js/index.js"></script>
 <script type="text/template" id="attribute-row-template">
-  <tr>
+  <tr class="row_attribute">
       <td><input type="text" class="form-control attribute-name" placeholder="字段名称"></td>
       <td>
           <select class="form-control attribute-selectType" name="selectType">
@@ -115,6 +116,12 @@
               <input type="text" class="form-control" id="group" name="group" placeholder="任务分组（建议网站域名命名，或用户命名）">
           </div>
           <div class="form-group">
+              <input type="text" class="form-control" id="startUrl" name="startUrl" placeholder="解析数据起始链接url">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" id="requestRegexes" name="requestRegexes" placeholder="查找需解析url正则">
+          </div>
+          <div class="form-group">
               <input type="text" class="form-control" id="cronExpression" name="cronExpression" placeholder="定时任务表达器">
           </div>
           <div class="form-group">
@@ -123,11 +130,11 @@
           <div class="form-group">
               <select class="form-control" name="crawlerType" id="crawlerType">
                   <option value="1">详细页面解析爬取</option>
-                  <option value="2">列表解析爬取</option>
+                  <option value="2">区域列表解析爬取</option>
               </select>
           </div>
           <div class="form-group">
-              <input type="text" class="form-control" name="ListNodeSelector" id="ListNodeSelector" placeholder="列表区域选择器">
+              <input type="text" class="form-control" name="ListNodeSelector" id="ListNodeSelector" placeholder="区域选列表行段选择器">
           </div>
           <div class="form-group">
               <h2>字段映射</h2>
@@ -142,7 +149,7 @@
                           <td></td>
                       </tr>
                   </thead>
-                  <tr>
+                  <tr class="row_attribute">
                       <td><input type="text" class="form-control attribute-name" placeholder="字段名称"></td>
                       <td>
                           <select class="form-control attribute-selectType" name="selectType">
@@ -168,7 +175,7 @@
               </table>
           </div>
           <div class="form-group">
-              <button type="submit" class="btn btn-default pull-left">提交</button>
+              <button type="button" class="btn btn-default pull-left btn-submit-scheduler">提交</button>
               <button type="button" class="btn btn-default pull-right" onclick="$.fancybox.close();">取消</button>
           </div>
       </form>

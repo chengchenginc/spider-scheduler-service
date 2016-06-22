@@ -9,11 +9,13 @@ public class ScheduleJob implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String name;	//任务名
-	private String group = "cc-spider";	//任务组
+	private String group = "spider-scheduler";	//任务组
 	private String cronExpression;	//cron表达式
 	private String status;	//状态
 	private String description;	//描述
 	private String className;	//要执行的任务类路径名
+	
+	private SimplePage simplePage;
 	
 	public ScheduleJob() {
 		super();
@@ -83,6 +85,13 @@ public class ScheduleJob implements Serializable {
 		this.className = className;
 	}
 
+	public SimplePage getSimplePage() {
+		return simplePage;
+	}
+
+	public void setSimplePage(SimplePage simplePage) {
+		this.simplePage = simplePage;
+	}
 
 
 }

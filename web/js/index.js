@@ -125,6 +125,12 @@ $(function() {
         }
     });
 
+    //提交按钮点击
+    $(document).on("click",".btn-submit-scheduler",function(){
+          var data = scheduler.getSubmitData();
+          jobManager.addJob(data,function(){
 
+          });
+    });
 
 });

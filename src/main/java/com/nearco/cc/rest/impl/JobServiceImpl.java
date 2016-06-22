@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import org.quartz.CronExpression;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.nearco.cc.model.ScheduleJob;
 import com.nearco.cc.model.SimplePage;
 import com.nearco.cc.rest.APIService;
@@ -25,11 +24,11 @@ public class JobServiceImpl extends APIService implements JobService {
 
 	@Override
 	public Map<?, ?> addJob(ScheduleJob job, SimplePage page) {
-		if (job == null || job.getName() == null || page == null || page.getAttributes() == null) {
+		if (job == null || job.getName().isEmpty() || page == null || page.getAttributes().isEmpty()) {
 			return error("参数错误");
 		}
-		System.out.println(JSON.toJSON(page.getAttributes()));
-		System.out.println(JSON.toJSON(page.getTargetRequests()));
+		job.setSimplePage(page);
+		jobService.add(job);
 		return success(null, "ok");
 	}
 

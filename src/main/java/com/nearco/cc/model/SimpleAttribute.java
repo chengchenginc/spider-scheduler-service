@@ -1,7 +1,10 @@
 package com.nearco.cc.model;
 
-public class SimpleAttribute {
+import java.io.Serializable;
 
+public class SimpleAttribute implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String selector;// 选择器
 	private SelectType selectType;// 类型

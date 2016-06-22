@@ -21,6 +21,7 @@ import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nearco.cc.Constants;
 import com.nearco.cc.model.ScheduleJob;
 
 
@@ -48,7 +49,7 @@ public class ScheduleJobService{
 		}
 		@SuppressWarnings("unchecked")
 		JobDetail jobDetail = JobBuilder.newJob(job).withIdentity(scheduleJob.getName(), scheduleJob.getGroup()).build();
-		jobDetail.getJobDataMap().put("scheduleJob", scheduleJob);
+		jobDetail.getJobDataMap().put(Constants.JOB_DATA_SHEDULE_JOB, scheduleJob);
 		
  
 		//表达式调度构建器（可判断创建SimpleScheduleBuilder）
