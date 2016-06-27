@@ -28,7 +28,7 @@ public class SimplePageProcessor implements PageProcessor {
 
 	public void setSimplePage(SimplePage simplePage) {
 		this.simplePage = simplePage;
-		this.site = simplePage.getSite();
+		this.site = simplePage.createSite();
 	}
 
 	@Override

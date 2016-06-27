@@ -47,5 +47,9 @@ public interface JobService {
 	@Path("restart")
 	@GET
 	public Map<?, ?> restartJob(@QueryParam("name") String name, @QueryParam("group") String group);
+	
+	@Path("get")
+	@GET
+	public Map<?, ?> getJob(@QueryParam("name") String name, @QueryParam("group") String group);
 
 }

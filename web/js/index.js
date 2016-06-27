@@ -31,7 +31,7 @@ $(function() {
                 title: "操作",
                 formatter:function(value,row,index){
                   var view = '<a href="showdata.html?name='+row.name+'&group='+row.group+'" target="_blank">查看数据</a>';
-                  var edit = '<a href="javascript:;" style="margin-left:30px;">编辑</a>';
+                  var edit = '<a href="#pop_scheduler" class="btn-fancybox-update"  data-type="update" data-name="'+row.name+'" data-group="'+row.group+'" style="margin-left:30px;">编辑</a>';
                   return view+edit;
                 }
             }],
@@ -52,7 +52,6 @@ $(function() {
             locale: 'zh-CN'
         });
 
-
         $(".editable").editable().on("save",function(e, params){
             $row = $(this).parent();
             var name = $row.find("td:eq(1)").text();
@@ -72,37 +71,18 @@ $(function() {
         };
     });
 
-    //弹出层
-    $(".btn-fancybox").fancybox({
-          afterClose:function(){
-              var $form =  $("form[name='form_scheduler']");
-              $form[0].reset();
-          }
-    });
-
-    //新增解析属性
-    $(document).on("click",".btn-add-attribute",function(){
-      var $this = $(this);
-      var $table = $this.next();
-      var template = $("#attribute-row-template").html();
-      $(template).insertAfter($table.find("tr:last"));
-    });
-
-
-    //删除解析属性
-    $(document).on("click",".btn-remove-attribute",function(){
-      var $this = $(this);
-      var $tr = $this.parent().parent();
-      $tr.remove();
-    });
-
+    function refreshTable(){
+        jobManager.list(null, function(data) {
+            $('#scheduler_list_table').bootstrapTable("load",data);
+        });
+    }
 
     $("#btn_stop").click(function(){
         var rows = $('#scheduler_list_table').bootstrapTable("getSelections");
         if(rows.length>0){
            var row = rows[0];
            jobManager.stopJob(row.name,row.group,function(){
-
+              refreshTable();
            });
         }
     });
@@ -129,15 +109,38 @@ $(function() {
         if(rows.length>0){
            var row = rows[0];
            jobManager.restartJob(row.name,row.group);
+           refreshTable();
         }
     });
 
-    //提交按钮点击
-    $(document).on("click",".btn-submit-scheduler",function(){
-          var data = scheduler.getSubmitData();
-          jobManager.addJob(data,function(){
-
-          });
+    //弹出层
+    $(".btn-fancybox-add").fancybox({
+          beforeShow:function(){
+              var $pop = $($(this).attr("href"));
+              $pop.find("h1").text("新增采集任务");
+          },
+          afterClose:function(){
+              var $form =  $("form[name='form_scheduler']");
+              $form[0].reset();
+          }
     });
+
+  //编辑弹出层
+    $(".btn-fancybox-update").fancybox({
+          beforeShow:function(){
+              var $pop = $($(this).attr("href"));
+              $pop.find("h1").text("修改采集任务");
+              $pop.find("form").data("update",true);
+          },
+          afterClose:function(){
+              var $form =  $("form[name='form_scheduler']");
+              $form.removeData("update");
+              $form[0].reset();
+          }
+    });
+
+    function showEditJob(name,group){
+
+    };
 
 });

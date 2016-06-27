@@ -13,7 +13,6 @@ import us.codecraft.webmagic.Site;
 public class SimplePage implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Site site;
 	// 浏览器设置
 	private String domain;
 	private String userAgent;
@@ -109,22 +108,19 @@ public class SimplePage implements Serializable {
 		}
 	}
 
-	public Site getSite() {
-		if (this.site == null) {
-			Site newSite = Site.me();
-			if (this.domain != null) {
-				newSite.setDomain(this.domain);
-			}
-			if (this.userAgent != null) {
-				newSite.setUserAgent(userAgent);
-			}
-			if (this.charset != null) {
-				newSite.setCharset(this.charset);
-			}
-			newSite.setSleepTime(this.sleepTime);
-			newSite.setCycleRetryTimes(this.retryTimes);
-			this.site = newSite;
+	public Site createSite() {
+		Site site = Site.me();
+		if (this.domain != null) {
+			site.setDomain(this.domain);
 		}
+		if (this.userAgent != null) {
+			site.setUserAgent(userAgent);
+		}
+		if (this.charset != null) {
+			site.setCharset(this.charset);
+		}
+		site.setSleepTime(this.sleepTime);
+		site.setCycleRetryTimes(this.retryTimes);
 		return site;
 	}
 

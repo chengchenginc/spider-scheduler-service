@@ -79,4 +79,13 @@ public class JobServiceImpl extends APIService implements JobService {
 		return success(null, "ok");
 	}
 
+	@Override
+	public Map<?, ?> getJob(String name, String group) {
+		ScheduleJob job = jobService.getScheduleJob(name, group);
+		if(job==null){
+			return error("无此任务");
+		}
+		return success(job, "ok");
+	}
+
 }

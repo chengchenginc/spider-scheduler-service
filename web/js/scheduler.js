@@ -51,3 +51,37 @@
     win.scheduler = scheduler;
 
 })(window, jQuery);
+
+
+$(function(){
+
+  //新增解析属性
+  $(document).on("click",".btn-add-attribute",function(){
+    var $this = $(this);
+    var $table = $this.next();
+    var template = $("#attribute-row-template").html();
+    $(template).insertAfter($table.find("tr:last"));
+  });
+
+
+  //删除解析属性
+  $(document).on("click",".btn-remove-attribute",function(){
+    var $this = $(this);
+    var $tr = $this.parent().parent();
+    $tr.remove();
+  });
+
+  //提交按钮点击
+  $(document).on("click",".btn-submit-scheduler",function(){
+        var $form = $(this).parents("form");
+        if($form.data("update")){
+          
+        }else{
+          var data = scheduler.getSubmitData();
+          jobManager.addJob(data,function(){
+              refreshTable();
+          });
+        }
+  });
+
+});
