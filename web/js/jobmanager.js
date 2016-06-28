@@ -34,6 +34,11 @@
         api.post(jobManager.host + "/add", data, callback);
     };
 
+    jobManager.updateJob = function(data, callback) {
+        data.attributes = JSON.stringify(data.attributes);
+        api.post(jobManager.host + "/update", data, callback);
+    };
+
     jobManager.modifyJobTrigger = function(name, group, cron, callback) {
         api.post(jobManager.host + "/modify", {
             name: name,
@@ -56,7 +61,7 @@
         }, callback);
     };
 
-    jobManager.getJob = function(name, group) {
+    jobManager.getJob = function(name, group,callback) {
         api.get(jobManager.host + "/get", {
             name: name,
             group: group

@@ -51,5 +51,9 @@ public interface JobService {
 	@Path("get")
 	@GET
 	public Map<?, ?> getJob(@QueryParam("name") String name, @QueryParam("group") String group);
+	
+	@Path("update")
+	@POST
+	public Map<?, ?> updateJob(@Form ScheduleJob job, @Form SimplePage page);
 
 }

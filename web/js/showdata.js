@@ -5,7 +5,7 @@ $(function(){
 
   function showData(params,callback){
       if(!params.limit){
-         params.limit = 5;
+         params.limit = 10;
       }
       if(!params.page){
          params.page = 1;

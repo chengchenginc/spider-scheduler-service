@@ -1,186 +1,199 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
+
 <head>
- <title></title>
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
- <!-- 新 Bootstrap 核心 CSS 文件 -->
- <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
- <!-- 可选的Bootstrap主题文件（一般不用引入） -->
- <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
- <link href="components/jquery-confirm/css/jquery-confirm.css" rel="stylesheet"/>
- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css" />
- <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
- <link rel="stylesheet" href="components/fancybox/jquery.fancybox.css" />
- <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+    <link href="components/jquery-confirm/css/jquery-confirm.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="components/fancybox/jquery.fancybox.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
-  <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">简单结构化数据采集</a>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">简单结构化数据采集</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search">
+                </form>
+            </div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search">
-          </form>
-        </div>
-      </div>
     </nav>
     <div class="container-fluid">
-    	<div class="row">
-        <div id="toolbar" class="btn-group">
-          <button id="btn_add" type="button" class="btn btn-default btn-fancybox-add" href="#pop_scheduler">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-          </button>
-          <button id="btn_delete" type="button" class="btn btn-default">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-          </button>
-          <button id="btn_stop" type="button" class="btn btn-default">
-              <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>停止运行
-          </button>
-          <button id="btn_run_once" type="button" class="btn btn-default">
-              <span class="glyphicon glyphicon-play" aria-hidden="true"></span>立即执行一次
-          </button>
-          <button id="btn_restart" type="button" class="btn btn-default" >
-            <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>重新启动
-          </button>
+        <div class="row">
+            <div id="toolbar" class="btn-group">
+                <button id="btn_add" type="button" class="btn btn-default btn-fancybox-add" href="#pop_scheduler">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                </button>
+                <button id="btn_delete" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                </button>
+                <button id="btn_stop" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>停止运行
+                </button>
+                <button id="btn_run_once" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>立即执行一次
+                </button>
+                <button id="btn_restart" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>重新启动
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table  table-striped" id="scheduler_list_table">
+                </table>
+            </div>
         </div>
-        <div class="table-responsive">
-        	<table class="table  table-striped" id="scheduler_list_table">
-          </table>
-        </div>
-    	</div>
     </div>
 </body>
-<script src="components/jquery.js" ></script>
+<script src="components/jquery.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="components/jquery.datagrid.js" ></script>
-<script src="components/jquery-confirm/jquery-confirm.js" ></script>
-<script src="components/fancybox/jquery.fancybox.js" ></script>
-<script src="components/fetch.js" ></script>
-<script src="components/template.js" ></script>
-<script src="components/api.js" ></script>
+<script src="components/jquery.datagrid.js"></script>
+<script src="components/jquery-confirm/jquery-confirm.js"></script>
+<script src="components/fancybox/jquery.fancybox.js"></script>
+<script src="components/fetch.js"></script>
+<script src="components/template.js"></script>
+<script src="components/api.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <!-- Latest compiled and minified Locales -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/locale/bootstrap-table-zh-CN.min.js"></script>
-<script src="js/jobmanager.js" ></script>
+<script src="js/jobmanager.js"></script>
 <script src="js/scheduler.js"></script>
 <script src="js/index.js"></script>
 <script type="text/template" id="attribute-row-template">
-  <tr class="row_attribute">
-      <td><input type="text" class="form-control attribute-name" placeholder="字段名称"></td>
-      <td>
-          <select class="form-control attribute-selectType" name="selectType">
-            <option value="css">css</option>
-            <option value="xpath">xpath</option>
-          </select>
-      </td>
-      <td><input type="text" class="form-control attribute-selector" placeholder="选择器值"></td>
-      <td>
-        <select class="form-control attribute-selectMethod" name="selectMethod">
-          <option value="text">text</option>
-          <option value="allText">allText</option>
-          <option value="tidyText">tidyText</option>
-          <option value="html">html</option>
-          <option value="outerHtml">outerHtml</option>
-          <option value="regex">regex</option>
-        </select>
-      </td>
-      <td>
-        <button type="button" class="btn btn-default glyphicon glyphicon-remove btn-remove-attribute">移除</button>
-      </td>
-  </tr>
+    <tr class="row_attribute">
+        <td>
+            <input type="text" class="form-control attribute-name" placeholder="字段名称">
+        </td>
+        <td>
+            <select class="form-control attribute-selectType" name="selectType">
+                <option value="css">css</option>
+                <option value="xpath">xpath</option>
+            </select>
+        </td>
+        <td>
+            <input type="text" class="form-control attribute-selector" placeholder="选择器值">
+        </td>
+        <td>
+            <select class="form-control attribute-selectMethod" name="selectMethod">
+                <option value="text">text</option>
+                <option value="allText">allText</option>
+                <option value="tidyText">tidyText</option>
+                <option value="html">html</option>
+                <option value="outerHtml">outerHtml</option>
+                <option value="regex">regex</option>
+            </select>
+        </td>
+        <td>
+            <button type="button" class="btn btn-default glyphicon glyphicon-remove btn-remove-attribute">移除</button>
+        </td>
+    </tr>
 </script>
 <script type="text/html">
-  <div class="pop_scheduler" id="pop_scheduler" style="display:none;">
-      <h1 class="text-center">新增采集任务</h1>
-      <form metod="post" class="form_scheduler" name="form_scheduler" role="form">
-          <div class="form-group">
-              <input type="text" class="form-control" id="name" name="name" placeholder="任务名称（建议爬取页面命名）">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" id="group" name="group" placeholder="任务分组（建议网站域名命名，或用户命名）">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" id="startUrl" name="startUrl" placeholder="解析数据起始链接url">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" id="requestRegexes" name="requestRegexes" placeholder="查找需解析url正则">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" id="cronExpression" name="cronExpression" placeholder="定时任务表达器">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" id="className" name="className" placeholder="执行任务类" value="com.nearco.cc.task.SimpleSpiderTask">
-          </div>
-          <div class="form-group">
-              <select class="form-control" name="crawlerType" id="crawlerType">
-                  <option value="1">详细页面解析爬取</option>
-                  <option value="2">区域列表解析爬取</option>
-              </select>
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" name="listNodeSelector" id="listNodeSelector" placeholder="区域选列表行段选择器">
-          </div>
-          <div class="form-group">
-              <h2>字段映射</h2>
-              <button type="button" class="btn btn-default pull-left glyphicon glyphicon-plus btn-add-attribute">新增字段</button>
-              <table class="table">
-                  <thead>
-                      <tr>
-                          <td>字段名称</td>
-                          <td>选择器类型</td>
-                          <td>选择器值</td>
-                          <td>选择内容</td>
-                          <td></td>
-                      </tr>
-                  </thead>
-                  <tr class="row_attribute">
-                      <td><input type="text" class="form-control attribute-name" placeholder="字段名称"></td>
-                      <td>
-                          <select class="form-control attribute-selectType" name="selectType">
-                            <option value="css">css</option>
-                            <option value="xpath">xpath</option>
-                          </select>
-                      </td>
-                      <td><input type="text" class="form-control attribute-selector" placeholder="选择器值"></td>
-                      <td>
-                        <select class="form-control attribute-selectMethod" name="selectMethod">
-                          <option value="text">text</option>
-                          <option value="allText">allText</option>
-                          <option value="tidyText">tidyText</option>
-                          <option value="html">html</option>
-                          <option value="outerHtml">outerHtml</option>
-                          <option value="regex">regex</option>
-                        </select>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-remove btn-remove-attribute">移除</button>
-                      </td>
-                  </tr>
-              </table>
-          </div>
-          <div class="form-group">
-              <button type="button" class="btn btn-default pull-left btn-submit-scheduler">提交</button>
-              <button type="button" class="btn btn-default pull-right" onclick="$.fancybox.close();">取消</button>
-          </div>
-      </form>
-  </div>
-</script><!--js html模版-->
+    <div class="pop_scheduler" id="pop_scheduler" style="display:none;">
+        <h1 class="text-center">新增采集任务</h1>
+        <form metod="post" class="form_scheduler" name="form_scheduler" role="form">
+            <div class="form-group">
+                <input type="text" class="form-control" name="name" placeholder="任务名称（建议爬取页面命名）">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="group" placeholder="任务分组（建议网站域名命名，或用户命名）">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="startUrl" placeholder="解析数据起始链接url">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="requestRegexes" placeholder="查找需解析url正则">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="cronExpression" placeholder="定时任务表达器">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="className" placeholder="执行任务类" value="com.nearco.cc.task.SimpleSpiderTask">
+            </div>
+            <div class="form-group">
+                <select class="form-control" name="crawlerType">
+                    <option value="1">详细页面解析爬取</option>
+                    <option value="2">区域列表解析爬取</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="listNodeSelector" placeholder="区域选列表行段选择器">
+            </div>
+            <div class="form-group">
+                <h2>字段映射</h2>
+                <button type="button" class="btn btn-default pull-left glyphicon glyphicon-plus btn-add-attribute">新增字段</button>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>字段名称</td>
+                            <td>选择器类型</td>
+                            <td>选择器值</td>
+                            <td>选择内容</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row_attribute">
+                            <td>
+                                <input type="text" class="form-control attribute-name" placeholder="字段名称">
+                            </td>
+                            <td>
+                                <select class="form-control attribute-selectType" name="selectType">
+                                    <option value="css">css</option>
+                                    <option value="xpath">xpath</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control attribute-selector" placeholder="选择器值">
+                            </td>
+                            <td>
+                                <select class="form-control attribute-selectMethod" name="selectMethod">
+                                    <option value="text">text</option>
+                                    <option value="allText">allText</option>
+                                    <option value="tidyText">tidyText</option>
+                                    <option value="html">html</option>
+                                    <option value="outerHtml">outerHtml</option>
+                                    <option value="regex">regex</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-default glyphicon glyphicon-remove btn-remove-attribute">移除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-default pull-left btn-submit-scheduler">提交</button>
+                <button type="button" class="btn btn-default pull-right" onclick="$.fancybox.close();">取消</button>
+            </div>
+        </form>
+    </div>
+</script>
+<!--js html模版-->
 <script src="js/popbox.js"></script>
 
 

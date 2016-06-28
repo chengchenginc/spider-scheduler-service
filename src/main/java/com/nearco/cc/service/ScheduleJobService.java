@@ -96,7 +96,6 @@ public class ScheduleJobService {
 	 */
 	public List<ScheduleJob> getAllScheduleJob() {
 		List<ScheduleJob> scheduleJobList = new ArrayList<ScheduleJob>();
-		;
 		GroupMatcher<JobKey> matcher = GroupMatcher.anyJobGroup();
 		try {
 			Set<JobKey> jobKeys = scheduler.getJobKeys(matcher);

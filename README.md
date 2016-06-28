@@ -24,5 +24,13 @@ TODO：数据存储（ES或mysqk），数据导入
 3. 查看爬去数据
 	![](https://github.com/chengchengInc/spider-scheduler-service/blob/master/web/img/viewdata.png?raw=true) 
 
+
+
+## Next TODO ##
+1. 接口数据爬取
+2. 支持Ajax（基于selenium）渲染数据爬取
+3. 扩展支持模拟登录
+
+
 ## 问题反馈与建议 ##
 email:chengchenginc@gmail.com

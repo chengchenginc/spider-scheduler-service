@@ -88,4 +88,15 @@ public class JobServiceImpl extends APIService implements JobService {
 		return success(job, "ok");
 	}
 
+	@Override
+	public Map<?, ?> updateJob(ScheduleJob job, SimplePage page) {
+		if (job == null || job.getName().isEmpty() || page == null || page.getAttributes().isEmpty()) {
+			return error("参数错误");
+		}
+		jobService.delJob(job.getName(), job.getGroup());
+		job.setSimplePage(page);
+		jobService.add(job);
+		return success(null, "ok");
+	}
+
 }
