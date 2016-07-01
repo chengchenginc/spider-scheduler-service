@@ -3,10 +3,14 @@ package com.nearco.cc.search.service.impl;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.elasticsearch.action.admin.indices.exists.types.TypesExistsRequest;
+import org.elasticsearch.action.admin.indices.exists.types.TypesExistsResponse;
 import org.elasticsearch.action.bulk.BulkProcessor;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -18,6 +22,8 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.springframework.beans.factory.DisposableBean;
@@ -51,7 +57,7 @@ public class SearchServiceImpl implements SearchService, DisposableBean {
 		this.cluster = cluster;
 	}
 
-	protected Client getClient() {
+	public Client getClient() {
 		if (this.client == null) {
 			if (this.hosts.isEmpty()) {
 				// throw new Exception("hosts未设置!");
@@ -103,14 +109,28 @@ public class SearchServiceImpl implements SearchService, DisposableBean {
 	public PagerModel search(String index, String type, PagerModel pager) {
 		int from = (pager.getPage() - 1) * pager.getLimit();
 		List<Map<String, Object>> documents = new ArrayList<>();
+		QueryBuilder queryBuilder = QueryBuilders.matchAllQuery();
+		if(pager.getQueryMap()!=null){
+			queryBuilder = QueryBuilders.boolQuery();
+			setQueryBuilder((BoolQueryBuilder) queryBuilder,pager.getQueryMap());
+		}
 		SearchResponse response = this.getClient().prepareSearch(index).setTypes(type).setFrom(from)
-				.setQuery(QueryBuilders.matchAllQuery()).setSize(pager.getLimit()).execute().actionGet();
+				.setQuery(queryBuilder).setSize(pager.getLimit()).execute().actionGet();
 		for (SearchHit hit : response.getHits().getHits()) {
 			documents.add(hit.getSource());
 		}
 		pager.setTotal(new Long(response.getHits().getTotalHits()).intValue());
 		pager.setData(documents);
 		return pager;
+	}
+	
+	private void setQueryBuilder(BoolQueryBuilder queryBuilder,Map<String,?> query){
+		Iterator<?> iterator = query.entrySet().iterator();
+		while(iterator.hasNext()){
+			@SuppressWarnings("unchecked")
+			Entry<String,?> entry = (Entry<String, ?>) iterator.next();
+			queryBuilder.must(QueryBuilders.termsQuery(entry.getKey(), entry.getValue().toString().toLowerCase()));
+		}
 	}
 
 	@Override
@@ -143,6 +163,15 @@ public class SearchServiceImpl implements SearchService, DisposableBean {
 	@Override
 	public void destroy() throws Exception {
 		this.client.close();
+	}
+
+	@Override
+	public boolean isExists(String index, String type) {
+		TypesExistsResponse  response = 
+	            getClient().admin().indices()
+	            .typesExists(new TypesExistsRequest(new String[]{index}, type)
+	            ).actionGet();
+		return response.isExists();
 	}
 
 }

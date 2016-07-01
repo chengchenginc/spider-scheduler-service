@@ -36,6 +36,8 @@
 		<validation_version>1.0.0.GA</validation_version>
 		<hibernate_validator_version>4.2.0.Final</hibernate_validator_version>
 		<quartz.version>2.2.3</quartz.version>
+		<!-- excel export -->
+		<poi.version>3.12</poi.version>
 	</properties>
 
 	<dependencies>
@@ -318,6 +320,27 @@
             <artifactId>guava</artifactId>
             <version>18.0</version>
         </dependency>
+        
+        <dependency>
+			<groupId>com.orangesignal</groupId>
+			<artifactId>orangesignal-csv</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
 
 	</dependencies>
 

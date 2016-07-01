@@ -3,7 +3,6 @@ package com.nearco.cc.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 import org.apache.log4j.Logger;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
@@ -20,11 +19,8 @@ import org.quartz.TriggerKey;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.alibaba.fastjson.JSON;
 import com.nearco.cc.Constants;
 import com.nearco.cc.model.ScheduleJob;
-import com.nearco.cc.model.SimplePage;
 
 @Service
 public class ScheduleJobService {
@@ -345,8 +341,6 @@ public class ScheduleJobService {
 				scheduleJob.setDescription(
 						cron.getDescription() == null ? ("触发器:" + trigger.getKey()) : cron.getDescription());
 			}
-			SimplePage page = scheduleJob.getSimplePage();
-			System.out.println(JSON.toJSON(page));
 			return scheduleJob;
 
 		} catch (Exception e) {

@@ -1,75 +1,90 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-<head>
- <title></title>
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
- <!-- 新 Bootstrap 核心 CSS 文件 -->
- <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
- <!-- 可选的Bootstrap主题文件（一般不用引入） -->
- <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
- <link href="components/jquery-confirm/css/jquery-confirm.css" rel="stylesheet"/>
- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css" />
- <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
- <link rel="stylesheet" href="components/fancybox/jquery.fancybox.css" />
- <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-  <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">简单结构化数据采集</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search">
-          </form>
-        </div>
-      </div>
-    </nav>
-    <div>
-      <div id="toolbar" class="btn-group">
-        <button id="btn_delete" type="button" class="btn btn-default btn-deleteAll">
-          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>清空数据
-        </button>
-      </div>
-      <br />
-      <div class="table-responsive">
-        <table class="table  table-striped" id="scheduler_data_list">
 
-        </table>
-        <div id="pagination">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+    <link href="components/jquery-confirm/css/jquery-confirm.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="components/fancybox/jquery.fancybox.css" />
+    <link rel="stylesheet" href="components/renderjson/renderjson.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">简单结构化数据采集</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search">
+                </form>
+            </div>
         </div>
-      </div>
+    </nav>
+    <div class="row">
+        <div id="toolbar" class="btn-group">
+            <button id="btn_delete" type="button" class="btn btn-default btn-deleteAll">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>清空数据
+            </button>
+        </div>
+        <br />
+        <div class="table-responsive">
+            <table class="table  table-striped" id="scheduler_data_list">
+
+            </table>
+            <div id="pagination">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  接口测试: <input type="text" name="url" id="request_url" style="width:70%;"/>
+                  <button type="button" class="btn btn-default btn-request-api">执行请求</button>
+              </div>
+              <div class="panel-body" id="scheduler_data_json">
+
+              </div>
+          </div>
     </div>
 
 </body>
-<script src="components/jquery.js" ></script>
+<script src="components/jquery.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="components/jquery.datagrid.js" ></script>
-<script src="components/jquery-confirm/jquery-confirm.js" ></script>
-<script src="components/jquery.bootpag.min.js" ></script>
-<script src="components/fetch.js" ></script>
-<script src="components/template.js" ></script>
-<script src="components/purl.js" ></script>
-<script src="components/api.js" ></script>
-<script src="js/jobdata.js" ></script>
+<script src="components/jquery.datagrid.js"></script>
+<script src="components/jquery-confirm/jquery-confirm.js"></script>
+<script src="components/jquery.bootpag.min.js"></script>
+<script src="components/fetch.js"></script>
+<script src="components/template.js"></script>
+<script src="components/purl.js"></script>
+<script src="components/api.js"></script>
+<script src="js/jobdata.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <!-- Latest compiled and minified Locales -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="components/renderjson/renderjson.js"></script>
 <script src="js/showdata.js"></script>
 
 

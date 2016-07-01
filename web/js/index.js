@@ -223,10 +223,12 @@ $(function() {
                 } else {
                     alert(response.message);
                 }
+                $.fancybox.close();
             });
         } else {
             jobManager.addJob(data, function() {
                 refreshTable();
+                $.fancybox.close();
             });
         }
     });
