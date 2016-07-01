@@ -10,7 +10,7 @@ $(function() {
         if (!params.page) {
             params.page = 1;
         }
-        if(params.query){
+        if (params.query) {
             params.query = encodeURIComponent(JSON.stringify(params.query));
         }
         jobdata.list(params, function(response) {
@@ -29,7 +29,7 @@ $(function() {
     $(".btn-deleteAll").click(function() {
         jobdata.deleteAll(PageParam, function(response) {
             window.location.reload();
-        })
+        });
     });
 
     showData(PageParam, function(response) {
@@ -67,8 +67,8 @@ $(function() {
     $(".btn-request-api").click(function() {
         var url = $("#request_url").val();
         var params = purl(url).param();
-        if(params.query){
-          params.query = eval("("+params.query+")")
+        if (params.query) {
+            params.query = eval("(" + params.query + ")")
         }
         showData(params, function(response) {
             $("#scheduler_data_json").html(renderjson.set_show_to_level('all')(response.data));
@@ -87,6 +87,46 @@ $(function() {
         $("#request_url").val(jobdata.host + "?" + url);
     }
     initUrl();
+
+
+    $(".btn-export a").click(function() {
+        var params = PageParam;
+        var format = $(this).text();
+        if (format == "") {
+            return;
+        }
+        params.format = format;
+        jobdata.export(params, function(url) {
+            var form = new createForm({
+                url: url,
+                params: params
+            });
+            $(form).submit();
+            form = null;
+        });
+    });
+
+    var createForm = function(config) {
+        config = config || {};
+        var url = config.url,
+            method = config.method || 'GET',
+            params = config.params || {};
+
+        var form = document.createElement('form');
+        form.action = url;
+        form.method = method;
+        form.target = "_blank";
+
+        for (var param in params) {
+            var value = params[param],
+                input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = param;
+            input.value = value;
+            form.appendChild(input);
+        }
+        return form;
+    };
 
 
 });

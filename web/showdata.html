@@ -42,11 +42,23 @@
         </div>
     </nav>
     <div class="row">
-        <div id="toolbar" class="btn-group">
-            <button id="btn_delete" type="button" class="btn btn-default btn-deleteAll">
+        <div id="toolbar" class="btn-group ">
+            <button id="btn_delete" type="button" class="btn btn-default btn-deleteAll pull-left">
                 <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>清空数据
             </button>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu btn-export">
+                  <li><a href="javascript:;">xls</a></li>
+                  <li><a href="javascript:;">xlsx</a></li>
+                  <li><a href="javascript:;">json</a></li>
+                  <li><a href="javascript:;">csv</a></li>
+                </ul>
+            </div>
         </div>
+
         <br />
         <div class="table-responsive">
             <table class="table  table-striped" id="scheduler_data_list">
@@ -57,15 +69,16 @@
         </div>
     </div>
     <div class="row">
-          <div class="panel panel-default">
-              <div class="panel-heading">
-                  接口测试: <input type="text" name="url" id="request_url" style="width:70%;"/>
-                  <button type="button" class="btn btn-default btn-request-api">执行请求</button>
-              </div>
-              <div class="panel-body" id="scheduler_data_json">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                接口测试:
+                <input type="text" name="url" id="request_url" style="width:70%;" />
+                <button type="button" class="btn btn-default btn-request-api">执行请求</button>
+            </div>
+            <div class="panel-body" id="scheduler_data_json">
 
-              </div>
-          </div>
+            </div>
+        </div>
     </div>
 
 </body>
